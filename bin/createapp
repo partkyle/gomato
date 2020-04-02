@@ -1,0 +1,16 @@
+#!/bin/bash -x
+
+BUILD_DIR="build"
+APP_NAME="gomato.app"
+BINARY_NAME="gomato"
+
+echo "creating ${APP_NAME} in ${BUILD_DIR}"
+
+mkdir -p "${BUILD_DIR}/${APP_NAME}/Contents/MacOS"
+mkdir -p "${BUILD_DIR}/${APP_NAME}/Contents/Resources"
+# plist
+cp resources/Info.plist "${BUILD_DIR}/${APP_NAME}/Contents/"
+# icon
+cp "${BUILD_DIR}/icon.icns" "${BUILD_DIR}/${APP_NAME}/Contents/Resources/"
+# binary
+cp "${BUILD_DIR}/${BINARY_NAME}" "${BUILD_DIR}/${APP_NAME}/Contents/MacOS/${BINARY_NAME}"

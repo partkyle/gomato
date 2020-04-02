@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ICON="$1"
+BUILD_DIR="build"
+ICONDIR="${BUILD_DIR}/icons.iconset"
+
+mkdir -p $ICONDIR
+
+for SIZE in 16 32 64 128 256 512 1024; do
+    sips -z $SIZE $SIZE "${ICON}" --out "${ICONDIR}/icon-${SIZE}x${SIZE}.png"
+done
+
+iconutil -c icns -o "${BUILD_DIR}/icon.icns" "${BUILD_DIR}/icons.iconset"

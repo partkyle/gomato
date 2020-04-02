@@ -3,13 +3,12 @@ all: package ;
 build: build/gomato
 
 build/gomato: *.go
-	go build -o build/gomato
+	./bin/build
 
 package: build/gomato.app ;
 
 build/gomato.app: icons build plist
-	./bin/createapp && touch build/done
-
+	./bin/createapp
 plist: resources/Info.plist ;
 
 icons: build/icon.icns

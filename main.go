@@ -8,22 +8,31 @@ import (
 	"github.com/getlantern/systray"
 )
 
+var VERSION = "REPLACEME"
+
 const DefaultTitle = "🍅"
 const DefaultTimerTitle = "Toggle Timer"
 
 type App struct {
 	timer        *systray.MenuItem
 	quit         *systray.MenuItem
+	about        *systray.MenuItem
 	stopSignal   chan struct{}
 	timerRunning bool
 }
 
 func NewApp() *App {
 	app := &App{
-		timer:      systray.AddMenuItem(DefaultTimerTitle, "Start a pomodoro"),
-		quit:       systray.AddMenuItem("Quit", "No more tomatoes"),
 		stopSignal: make(chan struct{}),
 	}
+
+	// setup menu
+	app.timer = systray.AddMenuItem(DefaultTimerTitle, "Start a pomodoro")
+	app.quit = systray.AddMenuItem("Quit", "No more tomatoes")
+	systray.AddSeparator()
+	app.about = systray.AddMenuItem(fmt.Sprintf("Gomato version %s", VERSION), fmt.Sprintf("Gomato version %s", VERSION))
+	app.about.Disable()
+
 	app.cleanup()
 	return app
 }
